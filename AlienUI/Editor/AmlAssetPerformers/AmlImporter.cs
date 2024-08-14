@@ -4,7 +4,6 @@ using UnityEditor;
 using UnityEditor.AssetImporters;
 using UnityEditor.Callbacks;
 using UnityEditor.Experimental.SceneManagement;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace AlienUI.Editors
@@ -66,7 +65,7 @@ namespace AlienUI.Editors
                 var path = AssetDatabase.GetAssetPath(prefab);
 
                 AssetDatabase.OpenAsset(prefab);
-                var stage = PrefabStageUtility.GetPrefabStage(prefab);
+                var stage = PrefabStageUtility.GetCurrentPrefabStage();
                 var engine = stage.prefabContentsRoot.GetComponent<Engine>();
                 var canvas = engine.transform.parent.GetComponent<Canvas>();
                 if (canvas) canvas.renderMode = RenderMode.WorldSpace;
