@@ -6,7 +6,7 @@ namespace AlienUI.Models
     {
         public bool Auto;
         public float Value;
-        public static Number Identity => new() { Auto = true, Value = 100f };
+        public static Number Identity => new Number() { Auto = true, Value = 100f };
 
         public static Number operator +(Number a, Number b)
         {
@@ -22,7 +22,7 @@ namespace AlienUI.Models
 
         public static implicit operator Number(float a)
         {
-            return new() { Auto = false, Value = a };
+            return new Number() { Auto = false, Value = a };
         }
 
         public int CompareTo(Number other)

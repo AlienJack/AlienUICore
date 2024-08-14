@@ -3,6 +3,7 @@ using System.IO;
 using UnityEditor;
 using UnityEditor.AssetImporters;
 using UnityEditor.Callbacks;
+using UnityEditor.Experimental.SceneManagement;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
@@ -49,7 +50,7 @@ namespace AlienUI.Editors
         }
 
         internal static bool OverrideAMLOpen = true;
-        [OnOpenAsset(1, OnOpenAssetAttributeMode.Execute)]
+        [OnOpenAsset(1)]
         public static bool OnOpenAsset(int instanceID, int line)
         {
             if (!OverrideAMLOpen) return false;
@@ -63,7 +64,9 @@ namespace AlienUI.Editors
 
                 var prefab = Settings.Get().EditPrefab;
                 var path = AssetDatabase.GetAssetPath(prefab);
-                var stage = PrefabStageUtility.OpenPrefab(path);
+
+                AssetDatabase.OpenAsset(prefab);
+                var stage = PrefabStageUtility.GetPrefabStage(prefab);
                 var engine = stage.prefabContentsRoot.GetComponent<Engine>();
                 var canvas = engine.transform.parent.GetComponent<Canvas>();
                 if (canvas) canvas.renderMode = RenderMode.WorldSpace;

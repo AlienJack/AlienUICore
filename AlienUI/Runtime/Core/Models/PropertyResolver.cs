@@ -50,8 +50,7 @@ namespace AlienUI.PropertyResolvers
 
         public override object Resolve(string originStr, Type enumType)
         {
-            Enum.TryParse(enumType, originStr, true, out var result);
-            return result;
+            return Enum.Parse(enumType, originStr, true);
         }
 
         public override object Lerp(object from, object to, float progress)

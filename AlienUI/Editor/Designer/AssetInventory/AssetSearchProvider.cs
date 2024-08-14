@@ -11,7 +11,7 @@ namespace AlienUI.Editors
 
         public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
         {
-            List<SearchTreeEntry> result = new();
+            List<SearchTreeEntry> result = new List<SearchTreeEntry>();
             var groupEntry = new SearchTreeGroupEntry(new GUIContent($"Edit {Target.Name ?? Target.GetType().Name}"), 0);
             result.Add(groupEntry);
             foreach (var item in AssetInventory.GetAssets())

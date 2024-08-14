@@ -109,7 +109,7 @@ namespace AlienUI.UIElements.ToolsScript
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(RefObject, Group, Name);
+            return AlienUtility.CombineHashCodes(RefObject, Group, Name);
         }
     }
 }

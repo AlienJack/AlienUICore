@@ -204,7 +204,7 @@ namespace AlienUI.Core
                 {
 #if UNITY_EDITOR
                     if (node.xmlnsList == null) node.xmlnsList = new List<(string, string)>();
-                    node.xmlnsList.Add(new(att.Name, att.Value));
+                    node.xmlnsList.Add((att.Name, att.Value));
 #endif
                     continue;
                 }

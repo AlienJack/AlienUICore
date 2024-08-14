@@ -13,7 +13,7 @@ namespace AlienUI.Editors
     {
         public static string Gen(AmlNodeElement elementRoot)
         {
-            XmlDocument document = new();
+            XmlDocument document = new XmlDocument();
             Gen(document, null, elementRoot, elementRoot.Document);
 
             return XDocument.Parse(document.OuterXml).ToString();

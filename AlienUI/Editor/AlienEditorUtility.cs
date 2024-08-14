@@ -91,7 +91,7 @@ namespace AlienUI.Editors
                 pix[i] = col;
             }
 
-            Texture2D result = new(width, height);
+            Texture2D result = new Texture2D(width, height);
             result.SetPixels32(pix);
             result.Apply();
             return result;

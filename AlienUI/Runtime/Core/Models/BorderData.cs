@@ -24,7 +24,7 @@ namespace AlienUI.Models
 
         public override bool Equals(object other)
         {
-            if (other is not BorderData)
+            if (!(other is BorderData))
             {
                 return false;
             }

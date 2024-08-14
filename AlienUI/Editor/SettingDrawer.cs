@@ -256,7 +256,8 @@ namespace AlienUI.Editors
 
             settings.CollectAsset();
 
-            string newAssetPath = Path.GetRelativePath("Assets/..", path);
+            var rootPath = Path.GetFullPath("Assets/..");
+            string newAssetPath = path.Replace(rootPath, string.Empty);
             return AssetDatabase.LoadAssetAtPath<AmlAsset>(newAssetPath);
         }
 

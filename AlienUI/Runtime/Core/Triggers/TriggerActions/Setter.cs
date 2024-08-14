@@ -1,6 +1,7 @@
 ﻿using AlienUI.Core.Triggers;
 using AlienUI.Models;
 using AlienUI.PropertyResolvers;
+using AlienUI.UIElements.ToolsScript;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -134,7 +135,7 @@ namespace AlienUI.Core.Resources
 
             public override int GetHashCode()
             {
-                return HashCode.Combine(Target, Property);
+                return AlienUtility.CombineHashCodes(Target, Property);
             }
         }
     }

@@ -7,6 +7,19 @@ namespace AlienUI.UIElements.ToolsScript
 {
     internal static class AlienUtility
     {
+        public static int CombineHashCodes(params object[] objects)
+        {
+            if (objects == null)
+                throw new ArgumentNullException(nameof(objects));
+
+            int hash = 17;
+            foreach (var obj in objects)
+            {
+                hash = hash * 31 + (obj?.GetHashCode() ?? 0);
+            }
+            return hash;
+        }
+
         private static PropertyInfo GetProperty(object obj, string propName)
         {
             var propInfo = obj.GetType().GetProperty(propName, BindingFlags.GetProperty | BindingFlags.SetProperty | BindingFlags.Public | BindingFlags.Instance);

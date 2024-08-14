@@ -1,3 +1,4 @@
+using AlienUI.UIElements.ToolsScript;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -163,7 +164,7 @@ namespace AlienUI.Models
 
         public override readonly int GetHashCode()
         {
-            return System.HashCode.Combine(m_columnDef, m_rowDef);
+            return AlienUtility.CombineHashCodes(m_columnDef, m_rowDef);
         }
 
         public enum EnumDefineType

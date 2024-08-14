@@ -8,7 +8,7 @@ namespace AlienUI.UIElements
     [Description(Icon = "button")]
     public class Button : UserControl
     {
-        public override ControlTemplate DefaultTemplate => new("Builtin.Button");
+        public override ControlTemplate DefaultTemplate => new ControlTemplate("Builtin.Button");
 
         public Sprite Icon
         {

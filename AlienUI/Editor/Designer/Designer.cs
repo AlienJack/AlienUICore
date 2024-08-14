@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEditor.EditorTools;
+using UnityEditor.Experimental.SceneManagement;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using EG = UnityEditor.EditorGUI;
@@ -111,7 +112,7 @@ namespace AlienUI.Editors
             }
 
             if (drawContext.Count > 0)
-                m_currentDrawTarget = drawContext[^1];
+                m_currentDrawTarget = drawContext[drawContext.Count - 1];
 
             if (m_currentDrawTarget != null)
             {
@@ -192,7 +193,7 @@ namespace AlienUI.Editors
 
         internal AmlAsset HasIndent()
         {
-            return indentQueue.Count >= 2 ? indentQueue[^2] : null;
+            return indentQueue.Count >= 2 ? indentQueue[indentQueue.Count - 2] : null;
         }
 
         internal void BackIndent()
@@ -389,7 +390,7 @@ namespace AlienUI.Editors
         private static void DrawElement(Designer designer)
         {
             if (designer.drawContext.Count == 0) return;
-            var target = designer.drawContext[^1];
+            var target = designer.drawContext[designer.drawContext.Count - 1];
 
             DrawTitle(designer, target);
             DrawProperties(target);
@@ -573,7 +574,8 @@ namespace AlienUI.Editors
             var color = G.color;
             ColorUtility.TryParseHtmlString(currentDPValue != defaultDPValue ? "#0f80be" : "#00000000", out var dirtyColor);
             G.color = dirtyColor;
-            GL.Box(string.Empty, EditorStyles.selectionRect, GL.Width(2));
+
+            GL.Box(string.Empty, GL.Width(2));
             G.color = color;
         }
 

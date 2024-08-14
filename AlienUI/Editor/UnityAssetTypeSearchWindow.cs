@@ -13,7 +13,7 @@ namespace AlienUI.Editors
 
         public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
         {
-            List<SearchTreeEntry> result = new();
+            List<SearchTreeEntry> result = new List<SearchTreeEntry>();
             var groupEntry = new SearchTreeGroupEntry(new GUIContent($"Select Type"), 0);
             result.Add(groupEntry);
 

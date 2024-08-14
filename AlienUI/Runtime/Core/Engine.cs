@@ -16,7 +16,7 @@ namespace AlienUI
         [SerializeField]
         private Settings m_runtimeSettings;
 
-        internal XmlAttributeParser AttParser = new();
+        internal XmlAttributeParser AttParser = new XmlAttributeParser();
 
         private void Awake()
         {
@@ -201,7 +201,13 @@ namespace AlienUI
 
         internal static void LogError(object message)
         {
-            currentHandlingDoc.TryPeek(out Document doc);
+            Document doc = null;
+
+            if (currentHandlingDoc.Count > 0)
+            {
+                doc = currentHandlingDoc.Peek();
+            }
+
             if (doc != null && doc.m_xmlAsset != null)
                 Debug.LogError(message, doc.m_xmlAsset);
             else Debug.LogError(message);

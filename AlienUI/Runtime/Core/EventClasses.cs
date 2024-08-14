@@ -28,7 +28,7 @@ namespace AlienUI.Events
     {
         public OnPointerEnterEvent(PointerEventData eventData) : base(eventData) { }
 
-        public static implicit operator OnPointerEnterEvent(PointerEventData uguiEvtData) => new(uguiEvtData);
+        public static implicit operator OnPointerEnterEvent(PointerEventData uguiEvtData) => new OnPointerEnterEvent(uguiEvtData);
 
         public override string EventName => "OnPointerEnter";
     }
@@ -37,21 +37,21 @@ namespace AlienUI.Events
     {
         public OnPointerExitEvent(PointerEventData eventData) : base(eventData) { }
 
-        public static implicit operator OnPointerExitEvent(PointerEventData uguiEvtData) => new(uguiEvtData);
+        public static implicit operator OnPointerExitEvent(PointerEventData uguiEvtData) => new OnPointerExitEvent(uguiEvtData);
         public override string EventName => "OnPointerExit";
     }
 
     public class OnPointerDownEvent : Event<PointerEventData>
     {
         public OnPointerDownEvent(PointerEventData eventData) : base(eventData) { }
-        public static implicit operator OnPointerDownEvent(PointerEventData uguiEvtData) => new(uguiEvtData);
+        public static implicit operator OnPointerDownEvent(PointerEventData uguiEvtData) => new OnPointerDownEvent(uguiEvtData);
         public override string EventName => "OnPointerDown";
     }
 
     public class OnPointerUpEvent : Event<PointerEventData>
     {
         public OnPointerUpEvent(PointerEventData eventData) : base(eventData) { }
-        public static implicit operator OnPointerUpEvent(PointerEventData uguiEvtData) => new(uguiEvtData);
+        public static implicit operator OnPointerUpEvent(PointerEventData uguiEvtData) => new OnPointerUpEvent(uguiEvtData);
         public override string EventName => "OnPointerUp";
     }
 
@@ -59,7 +59,7 @@ namespace AlienUI.Events
     {
         public OnPointerClickEvent(PointerEventData eventData) : base(eventData) { }
         public override string EventName => "OnPointerClick";
-        public static implicit operator OnPointerClickEvent(PointerEventData uguiEvtData) => new(uguiEvtData);
+        public static implicit operator OnPointerClickEvent(PointerEventData uguiEvtData) => new OnPointerClickEvent(uguiEvtData);
     }
 
     public class OnInitializePotentialDragEvent : Event<PointerEventData>
@@ -67,7 +67,7 @@ namespace AlienUI.Events
         public OnInitializePotentialDragEvent(PointerEventData eventData) : base(eventData) { }
 
         public override string EventName => "OnInitializePotentialDrag";
-        public static implicit operator OnInitializePotentialDragEvent(PointerEventData uguiEvtData) => new(uguiEvtData);
+        public static implicit operator OnInitializePotentialDragEvent(PointerEventData uguiEvtData) => new OnInitializePotentialDragEvent(uguiEvtData);
     }
 
     public class OnBeginDragEvent : Event<PointerEventData>
@@ -75,7 +75,7 @@ namespace AlienUI.Events
         public OnBeginDragEvent(PointerEventData eventData) : base(eventData) { }
 
         public override string EventName => "OnBeginDrag";
-        public static implicit operator OnBeginDragEvent(PointerEventData uguiEvtData) => new(uguiEvtData);
+        public static implicit operator OnBeginDragEvent(PointerEventData uguiEvtData) => new OnBeginDragEvent(uguiEvtData);
     }
 
     public class OnDragEvent : Event<PointerEventData>
@@ -83,21 +83,21 @@ namespace AlienUI.Events
         public OnDragEvent(PointerEventData eventData) : base(eventData) { }
 
         public override string EventName => "OnDrag";
-        public static implicit operator OnDragEvent(PointerEventData uguiEvtData) => new(uguiEvtData);
+        public static implicit operator OnDragEvent(PointerEventData uguiEvtData) => new OnDragEvent(uguiEvtData);
     }
     public class OnEndDragEvent : Event<PointerEventData>
     {
         public OnEndDragEvent(PointerEventData eventData) : base(eventData) { }
 
         public override string EventName => "OnEndDrag";
-        public static implicit operator OnEndDragEvent(PointerEventData uguiEvtData) => new(uguiEvtData);
+        public static implicit operator OnEndDragEvent(PointerEventData uguiEvtData) => new OnEndDragEvent(uguiEvtData);
     }
     public class OnDropEvent : Event<PointerEventData>
     {
         public OnDropEvent(PointerEventData eventData) : base(eventData) { }
 
         public override string EventName => "OnDrop";
-        public static implicit operator OnDropEvent(PointerEventData uguiEvtData) => new(uguiEvtData);
+        public static implicit operator OnDropEvent(PointerEventData uguiEvtData) => new OnDropEvent(uguiEvtData);
     }
 
     public class OnScrollEvent : Event<PointerEventData>
@@ -105,7 +105,7 @@ namespace AlienUI.Events
         public OnScrollEvent(PointerEventData eventData) : base(eventData) { }
 
         public override string EventName => "OnScroll";
-        public static implicit operator OnScrollEvent(PointerEventData uguiEvtData) => new(uguiEvtData);
+        public static implicit operator OnScrollEvent(PointerEventData uguiEvtData) => new OnScrollEvent(uguiEvtData);
     }
 
     public class OnShowEvent : Event<UIElement>

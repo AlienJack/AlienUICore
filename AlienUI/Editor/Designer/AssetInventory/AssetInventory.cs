@@ -134,7 +134,7 @@ namespace AlienUI.Editors
 
                     itemPosition.x += itemSize.x;
                     lineWidth -= itemSize.x;
-                    if (item.Value[^1] != asset)
+                    if (item.Value[item.Value.Count - 1] != asset)
                     {
                         if (lineWidth < itemSize.x)
                         {
