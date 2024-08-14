@@ -7,7 +7,7 @@ namespace AlienUI
 {
     public partial class Settings : ScriptableObject
     {
-        public static string RootPATH => "Assets/AlienUI";
+        public static string RootPATH => "Assets/AlienUICore/AlienUI";
         public static string SettingPath => Path.Combine(RootPATH, "Runtime/Settings.asset");
 
         [SettingsProvider]
