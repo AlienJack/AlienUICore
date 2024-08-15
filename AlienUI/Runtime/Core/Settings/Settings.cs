@@ -23,6 +23,8 @@ namespace AlienUI
         [NonSerialized]
         internal Dictionary<string, AmlResouces> m_windowDict = new Dictionary<string, AmlResouces>();
         [NonSerialized]
+        internal Dictionary<string, AmlResouces> m_hudDict = new Dictionary<string, AmlResouces>();
+        [NonSerialized]
         bool m_optimized;
         [NonSerialized]
         internal XmlTypeCollector m_collector = new XmlTypeCollector();
@@ -80,6 +82,10 @@ namespace AlienUI
                     {
                         m_windowDict[item.Name] = item;
                     }
+                    else if (typeof(HUD).IsAssignableFrom(item.AssetType))
+                    {
+                        m_hudDict[item.Name] = item;
+                    }
                     else
                     {
                         m_uiDict[item.Name] = item;
@@ -119,6 +125,12 @@ namespace AlienUI
         public AmlResouces GetWindowAsset(string windowName)
         {
             m_windowDict.TryGetValue(windowName, out var value);
+            return value;
+        }
+
+        public AmlResouces GetHUDAsset(string hudName)
+        {
+            m_hudDict.TryGetValue(hudName, out var value);
             return value;
         }
 

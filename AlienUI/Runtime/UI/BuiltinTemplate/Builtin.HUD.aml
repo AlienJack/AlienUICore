@@ -1,0 +1,7 @@
+<Template xmlns="AlienUI.UIElements" xmlns:t="AlienUI.Core.Triggers" xmlns:r="AlienUI.Core.Resources" Type="AlienUI.UIElements.HUD" Horizontal="Stretch" Vertical="Stretch" Name="Builtin.HUD">
+  <Image Color="#00000000" Horizontal="Stretch" Vertical="Stretch">
+    <Dock ChildHorizontalAlign="Left" ChildVerticalAlign="Top" Horizontal="Left" Vertical="Top">
+      <Button Text="Back" Command="{TemplateBinding BackCmd}" Width="130" Height="50" Active="{TemplateBinding CanBeBack}" />
+    </Dock>
+  </Image>
+</Template>

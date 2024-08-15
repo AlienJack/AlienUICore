@@ -12,7 +12,7 @@ namespace AlienUI.UIElements
         public Font Font
         {
             get { return (Font)GetValue(FontProperty); }
-            set { SetValue(FontProperty, value); }
+            set { SetValue(FontProperty, value); } 
         }
         public static readonly DependencyProperty FontProperty =
             DependencyProperty.Register("Font", typeof(Font), typeof(Label), new PropertyMetadata(Settings.Get().GetUnityAsset<Font>("Builtin", "DefaultFont")), OnFontChanged);

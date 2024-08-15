@@ -1,9 +1,8 @@
 using AlienUI.Models;
-using AlienUI.UIElements;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AlienUI.UIManager
+namespace AlienUI.UIElements
 {
     public class UIManager : MonoBehaviour
     {
@@ -18,11 +17,34 @@ namespace AlienUI.UIManager
         private RectTransform m_windowRoot;
         private RectTransform m_floatRoot;
 
+        List<Settings.AmlResouces> m_hudSeq = new List<Settings.AmlResouces>();
+        List<ViewModel> m_hudSeq_vm = new List<ViewModel>();
+        HUD m_currentHUD = null;
+
         Dictionary<Settings.AmlResouces, HashSet<Window>> m_openedWindowsMap = new Dictionary<Settings.AmlResouces, HashSet<Window>>();
         Dictionary<Window, Settings.AmlResouces> m_openedWindows = new Dictionary<Window, Settings.AmlResouces>();
 
+        private static UIManager m_instance;
+        public static UIManager Instance
+        {
+            get
+            {
+                if (Application.isPlaying) return m_instance;
+                else
+                {
+                    return GameObject.FindObjectOfType<UIManager>();
+                }
+            }
+            private set
+            {
+                m_instance = value;
+            }
+        }
+
         private void Awake()
         {
+            Instance = this;
+
             if (gameObject.transform.parent == null) DontDestroyOnLoad(gameObject);
             if (m_engine.transform.parent == null) DontDestroyOnLoad(m_engine.gameObject);
             if (m_uiRoot.transform.parent == null) DontDestroyOnLoad(m_uiRoot.gameObject);
@@ -53,6 +75,72 @@ namespace AlienUI.UIManager
             m_engine.Focus(newUI);
 
             return newUI as T;
+        }
+
+        public T OpenHUD<T>(Settings.AmlResouces amlRes, ViewModel viewModel = null) where T : HUD
+        {
+            if (amlRes == null) return null;
+            if (amlRes.Aml == null) return null;
+
+            if (!typeof(T).IsAssignableFrom(amlRes.AssetType)) return null;
+
+            var index = m_hudSeq.IndexOf(amlRes);
+            if (index == -1) //未在队列中出现过的HUD
+            {
+                if (m_currentHUD != null)
+                {
+                    m_currentHUD.Close();
+                    m_currentHUD.OnFocusChanged -= NewUI_OnFocusChanged;
+                    m_currentHUD.OnClose -= NewUI_OnClose;
+                    m_currentHUD = null;
+                }
+                m_hudSeq.Add(amlRes);
+                m_hudSeq_vm.Add(viewModel);
+                m_currentHUD = m_engine.CreateUI(amlRes.Aml, m_hudRoot, viewModel) as HUD;
+            }
+            else if (index == m_hudSeq.Count - 1) //请求打开的HUD为当前HUD
+            {
+                return m_currentHUD as T;
+            }
+            else //在队列中打开过的HUD,将之后的HUD移除队列
+            {
+                m_hudSeq.RemoveRange(index + 1, m_hudSeq.Count - index - 1);
+                m_hudSeq_vm.RemoveRange(index + 1, m_hudSeq.Count - index - 1);
+                if (m_currentHUD != null)
+                {
+                    m_currentHUD.Close();
+                    m_currentHUD.OnFocusChanged -= NewUI_OnFocusChanged;
+                    m_currentHUD.OnClose -= NewUI_OnClose;
+                    m_currentHUD = null;
+                }
+                m_currentHUD = m_engine.CreateUI(amlRes.Aml, m_hudRoot, viewModel) as HUD;
+            }
+
+            m_currentHUD.OnFocusChanged += NewUI_OnFocusChanged;
+            m_currentHUD.OnClose += NewUI_OnClose;
+
+            m_engine.Focus(m_currentHUD);
+
+            return m_currentHUD as T;
+        }
+
+        public bool CanHUDBack(HUD hud)
+        {
+            return m_currentHUD == hud && m_hudSeq.Count > 1;
+        }
+
+        public void HUDBack(HUD hud)
+        {
+            if (!CanHUDBack(hud)) return;
+
+            m_currentHUD.Close();
+            m_hudSeq.RemoveAt(m_hudSeq.Count - 1);
+            m_hudSeq_vm.RemoveAt(m_hudSeq.Count - 1);
+
+            var amlRes = m_hudSeq[m_hudSeq.Count - 1];
+            var vm = m_hudSeq_vm[m_hudSeq.Count - 1];
+
+            OpenHUD<HUD>(amlRes, vm);
         }
 
         private void NewUI_OnClose(object sender, Events.OnCloseEvent e)
@@ -111,7 +199,5 @@ namespace AlienUI.UIManager
 
             return nodeRect;
         }
-
-
     }
 }

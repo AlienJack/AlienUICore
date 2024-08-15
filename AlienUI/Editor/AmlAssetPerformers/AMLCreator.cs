@@ -23,7 +23,21 @@ namespace AlienUI.Editors
             {
                 createAmlFile(type, createPath, templatePath);
             });
+        }
 
+        [MenuItem("Assets/Create/AlienUI/CreateHUD AML File", priority = 0)]
+        public static void CreateHUDAmlFile()
+        {
+            var select = Selection.GetFiltered<UnityEngine.Object>(SelectionMode.TopLevel).FirstOrDefault();
+            if (select == null) return;
+
+            var createPath = $"{AssetDatabase.GetAssetPath(select)}/HUD.aml";
+            var templatePath = $"{Settings.RootPATH}/Editor/AMLTextTemplate/HUD_AT.txt";
+
+            AlienUITypeSearchWindow.OpenWindow<HUD>((type) =>
+            {
+                createAmlFile(type, createPath, templatePath);
+            });
         }
 
         [MenuItem("Assets/Create/AlienUI/CreateTemplate AML File", priority = 0)]

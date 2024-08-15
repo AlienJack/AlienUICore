@@ -39,7 +39,7 @@ namespace AlienUI.Core
                     var resolverInstance = Activator.CreateInstance(type) as PropertyResolver;
                     m_propertyResolvers[resolverInstance.GetResolveType()] = resolverInstance;
                 }
-                else if (type.IsSubclassOf(uibaseType))
+                else if (type.IsSubclassOf(uibaseType)) 
                 {
                     m_uiTypes[type.FullName] = type;
                 }
