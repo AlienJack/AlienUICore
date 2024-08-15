@@ -8,7 +8,6 @@ using UnityEngine;
 
 namespace AlienUI.Editors
 {
-
     [ScriptedImporter(1, "aml")]
     public class AmlImporter : ScriptedImporter
     {
@@ -26,7 +25,7 @@ namespace AlienUI.Editors
             ctx.SetMainObject(amlAsset);
 
             EditorApplication.delayCall += handleCollectAsset;
-
+ 
             var path = ctx.assetPath;
             EditorApplication.CallbackFunction notify = null;
             notify = () =>
